@@ -1,63 +1,75 @@
 const fs = require('fs');
-const inquirer = require('inquirer');
-import('inquirer')
-const textLength = require('inquirer-maxlength-input-prompt')
-// inquirer.registerPrompt('maxlength-input', MaxLengthInputPrompt)
-// import select, { Separator } from '@inquirer/select';
-//npm install @inquirer/select for select seperator option
-//cli takes an object as a map for the arguments you wish to parse.
-//Each property/key in the object is the long version of the argument i.e.
+const { default: inquirer } = require('inquirer'); //trouble running inquirer so I switched to default/dynamic
+const fetch = require('node-fetch');
 
-const questions = [
-    {   
-    type: 'maxlength-input',
-    name: 'text',
-    message: 'Please enter 3 letters, numbers or symbols for your logo',
-    maxLength: 3
-},   
-{   
-    type: 'list',
-    name: 'shape',
-    message: 'select a shape',
-    choices: [
-        'circle',
-        'square', 
-        'triangle'
-    ]}
-    //promise chained to pass inquire data to fetch shape.svg
-    .then((res) => fetch(`./lib/more/shapes.js${res.Shape}`))
-    // promises are chained to parse the request for the json data
-    .then((res) => res.Shape.json())
-     // json data is accepted as user and logged to the console
-    .then((answerShape) => console.log(Shape))
-,
-{   
-    type: 'maxlength-input',
-    name: 'text',
-    message: 'Please enter 3 letters, numbers or symbols for your logo',
-    maxLength: 3
-},
-
-
-
-
-
-]
-
-inquirer.prompt(questions) 
-    .then(answers => {
-    })
-
-var text = function() {
-
+class Shape {
+    constructor(text, shape, color) {
+        this.text = text;
+        this.shape = shape;
+        this.color = color;
+        console.log('Shape');
+    }
+    generateSVG() {
+        return `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+            <text x="50%" y="50%" text-anchor="middle" fill="${this.color}">${this.text}</text>
+        </svg>`;
+    }
 }
 
-// inquirer.prompt({
-//     type: 'input'
-//     name: ''
-//     message: '',
-// })
+const questions = [
+    {
+        type: 'input',
+        name: 'text',
+        message: 'Please enter 3 letters, numbers or symbols for your logo',
+        maxLength: 3,
+        validate: function (input) {
+            return input.length === 3 ? true : 'Input must be exactly 3 characters long.';
+        }
+    },
+    {
+        type: 'list',
+        name: 'shape',
+        message: 'select a shape',
+        choices: [
+            'circle',
+            'square',
+            'triangle'
+        ]
+    },
+    {
+        type: 'list',
+        name: 'color',
+        message: 'select a color for the shape',
+        choices: [
+            'red',
+            'green',
+            'blue',
+            'purple',
+            'pink',
+            'gray',
+            'teal',
+            'silver',
+            'gold',
+            'bronze'
+        ]
+    }
+];
 
-
-
-//max input prompt https://github.com/jwarby/inquirer-maxlength-input-prompt
+inquirer.prompt(questions)
+    .then(answers => {
+        const { text, shape, color } = answers;
+        const logoMojo = new Shape(text, shape, color);
+    fetch(`./lib/more/${shape}.svg`)
+//   Fetch shape SVG based on user input
+    .then(response => response.text())
+    .then(svgData => {
+        //combined user data to svg file
+        const svgInput = logoMojo.generateSVG() + svgData;
+        fs.writeFileSync('logo.svg', svgInput);
+        console.log('LogoMojo Success!');
+    })
+        .catch(error => {console.log('inquirer error', error);
+});
+    })
+//promise chained to pass inquire data to fetch shape.svg
+//write to SVG file
