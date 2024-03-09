@@ -21,8 +21,8 @@ class Shape {
         }
     
         return `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-            <text x="50%" y="50%" text-anchor="middle" fill="white">${text}</text>
-            ${shapeMarkup}
+        ${shapeMarkup}    
+        <text x="50%" y="50%" text-anchor="middle" fill="white">${text}</text>
         </svg>`;
     }
     
