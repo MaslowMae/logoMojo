@@ -18,9 +18,9 @@ const {Circle, Square, Triangle} = require('./shapes.js'); //path to class file
         name: 'shape',
         message: 'select a shape',
         choices: [
-            'Circle',
-            'Square',
-            'Triangle'
+            'circle',
+            'square',
+            'triangle'
         ]
     },
     {
@@ -54,7 +54,11 @@ inquirer.prompt(questions)
         } else if (shape === 'triangle') {
             logoMojo = new Triangle (text, color);
         }
-        const shapeSvg = fs.readFileSync(`./lib/more/${shape.toLowerCase()}.svg`,'utf-8');
+        const shapeSvgPath = `./lib/more/${shape.toLowerCase()}.svg`;
+        if (!fs.existsSync(shapeSvgPath)) {
+            throw new Error(`SVG File '${shapeSvgPath}' not found`);
+        }
+        const shapeSvg = fs.readFileSync(shapeSvgPath,'utf-8');
 
         //combined user data to svg file
         const svgInput = logoMojo.generateSVG(color, text, shapeSvg);
