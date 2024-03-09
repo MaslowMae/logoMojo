@@ -7,7 +7,7 @@ This is a console app that prompts for input choices from the user and incorpora
 
 
 ## Visuals
-[![Video Demo](http://img.youtube.com/vi/63_BItEdhqA.jpg)](http://www.youtube.com/watch?v=63_BItEdhqA)
+[![Video Demo](http://img.youtube.com/vi/63_BItEdhqA?si=98Uu59WVE-JN-m_x.jpg)](http://www.youtube.com/watch?v=63_BItEdhqA)
 
 ## Installation
 Install dependencies NPM
