@@ -8,6 +8,7 @@ This is a console app that prompts for input choices from the user and incorpora
 
 ## Visuals
 <iframe src="https://drive.google.com/file/d/1wqsrE-9aNnuuChN3MmUowI0qRtTddMDE/preview" width="640" height="480"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/63_BItEdhqA?si=eiaFhnWbdPxtxODC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Installation
 Install dependencies NPM

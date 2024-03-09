@@ -65,6 +65,7 @@ class Triangle extends Shape {
     constructor(text, color) {
         super(text, 'triangle', color);
     }
+
 }
 
 

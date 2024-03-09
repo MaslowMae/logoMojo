@@ -2,7 +2,7 @@
   "dependencies": {
     "@inquirer/select": "^2.0.0",
     "cli": "^1.0.1",
-    "inquirer": "^8.2.4",
+    "inquirer": "^8.2.6",
     "node-fetch": "^3.3.2",
     "svg": "^0.1.0"
   },
@@ -11,7 +11,7 @@
   "description": "logo creator",
   "main": "index.js",
   "scripts": {
-    "test": "logotest"
+    "test": "npx jest shapes.test.js"
   },
   "repository": {
     "type": "git",
