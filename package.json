@@ -3,7 +3,6 @@
     "@inquirer/select": "^2.0.0",
     "cli": "^1.0.1",
     "inquirer": "^8.2.4",
-    "jest": "^29.7.0",
     "node-fetch": "^3.3.2",
     "svg": "^0.1.0"
   },
@@ -26,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/MaslowMae/logoMojo/issues"
   },
-  "homepage": "https://github.com/MaslowMae/logoMojo#readme"
+  "homepage": "https://github.com/MaslowMae/logoMojo#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
