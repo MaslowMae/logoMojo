@@ -24,23 +24,17 @@ const {Circle, Square, Triangle} = require('./shapes.js'); //path to class file
         ]
     },
     {
-        type: 'list',
+        type: 'input',
         name: 'color',
-        message: 'select a color for the shape',
-        choices: [
-            'red',
-            'green',
-            'blue',
-            'purple',
-            'pink',
-            'gray',
-            'teal',
-            'silver',
-            'gold',
-            'bronze'
-        ]
-    }
-];
+        message: 'Enter a color for the shape (keyword, hexadecimal, or RGB):',
+        validate: function(input) {
+            // Check if the input is a valid color keyword, hexadecimal, or RGB color
+            if (/^#[0-9A-F]{6}$/i.test(input) || /^(red|green|blue|purple|pink|gray|teal|silver|gold|bronze)$/i.test(input) || /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/i.test(input)) {
+                return true;
+            } else {
+                return 'Please enter a valid color keyword, hexadecimal, or RGB color (e.g., #RRGGBB, rgb(255, 0, 0))';
+            }
+        }}];
 
 inquirer.prompt(questions)
     .then(answers => {
@@ -64,6 +58,7 @@ inquirer.prompt(questions)
         const svgInput = logoMojo.generateSVG(color, text, shapeSvg);
             fs.writeFileSync('logo.svg', svgInput);
             console.log('LogoMojo Success!');
+            console.log('Generated logo.svg')
     })
             .catch(error => {
                 console.log('error creating svg:', error);
